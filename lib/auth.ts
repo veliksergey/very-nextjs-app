@@ -17,17 +17,21 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GITHUB_SECRET!,
     }),
     CredentialsProvider({
-      id: 'credentials',
+      // id: 'credentials',
       name: 'Credentials',
       credentials: {
         email: {label: 'Email', type: 'text', placeholder: 'Email'},
         password: {label: 'Password', type: 'password', placeholder: 'Password'},
       },
       async authorize(credentials) { // req
+        console.log('-- authorize()');
         return login(credentials!);
       },
     }),
   ],
+  pages: {
+    signIn: '/signin',
+  },
   session: {
     strategy: 'jwt',
   },

@@ -1,4 +1,5 @@
 'use server';
+import 'server-only';
 
 import {connectDb} from '@/lib/mongodb';
 import User from '@/models/User';

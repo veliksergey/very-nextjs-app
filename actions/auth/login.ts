@@ -1,4 +1,5 @@
 'use server';
+import 'server-only';
 
 import {connectDb} from '@/lib/mongodb';
 import User from '@/models/User';
@@ -16,7 +17,7 @@ export const login = async ({email, password}: Props) => {
 
   await connectDb();
   const user = await User.findOne({
-    email: email
+    email: email,
   }).select('+password');
 
   if (!user) {
@@ -25,11 +26,11 @@ export const login = async ({email, password}: Props) => {
 
   const passwordMatch = await bcrypt.compare(
     password,
-    user.password
-  )
+    user.password,
+  );
 
   if (!passwordMatch) {
     return null;
   }
   return user;
-}
+};

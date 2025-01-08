@@ -1,5 +1,3 @@
-'use client'; // ToDo: check if needed
-
 import {signOut, useSession} from 'next-auth/react';
 import Link from 'next/link';
 import SignOutIcon from '@/components/ui/icons/SignOutIcon';

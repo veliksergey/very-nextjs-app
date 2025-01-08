@@ -10,15 +10,13 @@ const RegisterPage = () => {
   const [state, formAction, isPending] = useActionState(register, {error: ''});
   const {status} = useSession();
 
-  if (status === 'authenticated') {
-    redirect('/');
-  }
-  console.log('-- status:', status);
+  // if (status === 'authenticated') {
+  //   redirect('/');
+  // }
 
   return (
     <section className="w-full h-screen flex items-center justify-center">
       <form action={formAction}
-        /*action={handleSubmit}*/
             className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2
         border border-solid border-black bg-white rounded">
         {/* {error && <div className="">{error}</div>}*/}
@@ -72,4 +70,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default RegisterPage
