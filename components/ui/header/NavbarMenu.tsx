@@ -30,7 +30,7 @@ const NavbarMenu = () => {
               className={clsx({active: pathname.startsWith('/about')})}
             >
               <InfoIcon/>
-              About
+              Protected Page
             </Link>
           </li>
         </ul>

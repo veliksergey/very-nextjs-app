@@ -20,7 +20,7 @@ const DrawerSide = () => {
     {
       href: '/about',
       title: 'About',
-      iconComponent: <InfoIcon/>
+      iconComponent: <InfoIcon/>,
     },
   ];
 
@@ -36,13 +36,13 @@ const DrawerSide = () => {
     if (drawerToggle && drawerToggle.type === 'checkbox') {
       drawerToggle.checked = false;
     }
-  }
+  };
 
   return (
     <div className="drawer-side">
       <label htmlFor="app-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
       <ul className="menu bg-base-200 min-h-full w-80 p-4">
-        {links.map(({href, title, icon, iconComponent}) => (
+        {links.map(({href, title, iconComponent}) => (
           <li key={title}>
             <Link
               href={href}

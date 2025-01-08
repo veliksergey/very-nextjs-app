@@ -12,7 +12,7 @@ export const connectDb = async () => {
     const {connection} = await mongoose.connect(MONGODB_URI as string);
 
     if (connection.readyState === 1) {
-      console.log('======== MONGODB CONNECTED');
+      console.log('======== MONGODB CONNECTED ========');
       return Promise.resolve(true);
     }
 

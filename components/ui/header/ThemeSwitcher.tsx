@@ -1,16 +1,19 @@
-import {useEffect, useState} from 'react';
-import ChevronDownIcon from '@/components/ui/icons/ChevronDownIcon';
+'use client';
+
+import {useEffect, useMemo, useState} from 'react';
 import PaintBrushIcon from '@/components/ui/icons/PaintBrushIcon';
 
 const ThemeSwitcher = () => {
-  const themeList: string[] = process.env.NEXT_PUBLIC_THEMES?.split(',') || [];
+  const themeList: string[] = useMemo(() => {
+    return process.env.NEXT_PUBLIC_THEMES?.split(',') || [];
+  }, []);
   const [currentTheme, setCurrentTheme] = useState<string | null>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || themeList[0];
     setCurrentTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
+  }, [themeList]);
 
   const handleThemeChange = (theme: string): void => {
     setCurrentTheme(theme);
@@ -22,8 +25,6 @@ const ThemeSwitcher = () => {
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1">
         <PaintBrushIcon/>
-        {/*Theme
-        <ChevronDownIcon size={3}/>*/}
       </div>
       <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
         {

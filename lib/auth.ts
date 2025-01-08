@@ -24,7 +24,6 @@ export const authOptions: AuthOptions = {
         password: {label: 'Password', type: 'password', placeholder: 'Password'},
       },
       async authorize(credentials) { // req
-        console.log('-- authorize()');
         return login(credentials!);
       },
     }),

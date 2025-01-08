@@ -6,10 +6,7 @@ import UserIcon from '@/components/ui/icons/UserIcon';
 import SignInIcon from '@/components/ui/icons/SignInIcon';
 
 const AuthLink = () => {
-  const {data: session, status} = useSession();
-
-  console.log('-- status:', status);
-  console.log('-- session:', session);
+  const {data: session} = useSession();
 
   if (session?.user) {
     return (
@@ -42,9 +39,11 @@ const AuthLink = () => {
   }
 
   return (
-    <button role="button" className="btn btn-ghost btn-circle my-1">
-      <SignInIcon/>
-    </button>
+    <Link href="/signin">
+      <button role="button" className="btn btn-ghost btn-circle my-1">
+        <SignInIcon/>
+      </button>
+    </Link>
   );
 };
 

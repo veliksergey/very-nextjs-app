@@ -33,7 +33,7 @@ const Navbar = () => {
             priority
           />
           <span className="text-lg text-pink-400 font-bold">
-            My Word
+            Very NextJs App
           </span>
         </Link>
       </div>

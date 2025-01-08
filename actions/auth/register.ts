@@ -8,11 +8,14 @@ import {redirect} from 'next/navigation';
 
 interface IState {
   error: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
-export const register = async (_prevState: IState, formData: FormData) => {
-  const name = formData.get('name');
-  const email = formData.get('email');
+export const register = async (_prevState: IState | null, formData: FormData): Promise<IState> => {
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
   try {
@@ -21,7 +24,10 @@ export const register = async (_prevState: IState, formData: FormData) => {
     const userFound = await User.findOne({email});
     if (userFound) {
       return {
-        error: 'Email already exists!',
+        error: 'This email is already registered!',
+        name,
+        email,
+        password,
       }
     }
 

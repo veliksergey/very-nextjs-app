@@ -1,73 +1,93 @@
 'use client';
 
 import Link from 'next/link';
-import {useActionState} from 'react'
-import {useSession} from 'next-auth/react';
-import {redirect} from 'next/navigation';
+import {useActionState} from 'react';
 import {register} from '@/actions/auth/register';
 
 const RegisterPage = () => {
-  const [state, formAction, isPending] = useActionState(register, {error: ''});
-  const {status} = useSession();
-
-  // if (status === 'authenticated') {
-  //   redirect('/');
-  // }
+  const [state, formAction, isPending] = useActionState(register, null);
 
   return (
-    <section className="w-full h-screen flex items-center justify-center">
-      <form action={formAction}
-            className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2
-        border border-solid border-black bg-white rounded">
-        {/* {error && <div className="">{error}</div>}*/}
+    <div className="flex items-center justify-center">
+      <div className="card w-96 bg-base-100 shadow-xl my-10">
+        <div className="card-body">
+          <h2 className="card-title">Sign Up</h2>
 
-        {state?.error && <p className="error">{state.error}</p>}
+          {/* error */}
+          {state?.error && (
+            <p className="alert alert-error mb-2">
+              <span>{state?.error}</span>
+            </p>
+          )}
 
-        <h1 className="mb-5 w-full text-2xl font-bold">Register</h1>
+          <form action={formAction}>
 
-        <label className="w-full text-sm">Full Name</label>
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded text-[13px]"
-          name="name"
-        />
-        <br/>
+            {/* name */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Full Name</span>
+              </label>
+              <input
+                type="name"
+                placeholder="Enter your first and last names"
+                className="input input-bordered w-full max-w-xs"
+                required
+                defaultValue={state?.name}
+                name="name"
+              />
+            </div>
 
-        <label className="w-full text-sm">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-          name="email"
-        />
-        <br/>
+            {/* email */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="input input-bordered w-full max-w-xs"
+                required
+                defaultValue={state?.email}
+                name="email"
+              />
+            </div>
 
+            {/* password */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className="input input-bordered w-full max-w-xs"
+                required
+                defaultValue={state?.password}
+                name="password"
+              />
+            </div>
 
-        <label className="w-full text-sm">Password</label>
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-          name="password"
-        />
-        <br/>
+            {/* submit btn */}
+            <div className="form-control w-full max-w-xs mt-4">
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={isPending}
+              >
+                {isPending ? 'Signing you up' : 'Sign Up'}
+              </button>
+            </div>
+          </form>
 
-        <button
-          type="submit"
-          className="w-full border border-solid border-black py-1.5 mt-2.5 rounded transition duration-150 ease hover:bg-black"
-          disabled={isPending}
-        >
-          {isPending ? 'Registering' : 'Sign up'}
-        </button>
-        <br/><br/>
+          {/* sign in link */}
+          <div className="text-center mt-4">
+            <Link href="/signin" className="underline">Already have an account?</Link>
+          </div>
 
-        <Link href="/api/auth/signin" className="text-sm text-[#888] transition duration-150 ease hover:text-black">
-          Already have an account?
-        </Link>
-      </form>
-    </section>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default RegisterPage
+export default RegisterPage;
