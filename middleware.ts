@@ -1,8 +1,11 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {getToken} from 'next-auth/jwt';
+import createMiddleware from 'next-intl/middleware';
+import {routing} from '@/i18n/routing';
 
 const protectedPaths: string[] = ['/about'];
 const authPaths: string[] = ['/register', '/signin'];
+const i18nPaths: string[] = ['/', '/(fr|en)/:path*'];
 
 export const middleware = async (req: NextRequest) => {
   const {pathname} = req.nextUrl;
@@ -21,7 +24,10 @@ export const middleware = async (req: NextRequest) => {
 
 export const config = {
   matcher: [
-    ...protectedPaths,
-    ...authPaths
+    // ...protectedPaths,
+    // ...authPaths,
+    ...i18nPaths,
   ],
 };
+
+export default createMiddleware(routing);
